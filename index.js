@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 5000;
 const sql = require('mssql');
+const azureIdentity = require('@azure/identity');
+const clientId = process.env.AZURE_CLIENT_ID;
+const clientSecret = process.env.AZURE_CLIENT_SECRET;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
