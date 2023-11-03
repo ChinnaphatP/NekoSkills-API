@@ -2,9 +2,6 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 5000;
 const sql = require('mssql');
-const azureIdentity = require('@azure/identity');
-const clientId = process.env.AZURE_CLIENT_ID;
-const clientSecret = process.env.AZURE_CLIENT_SECRET;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -12,10 +9,15 @@ app.use(express.urlencoded({ extended: true }));
 app.listen(PORT, () => console.log('server is running on port '+PORT));
 
 const config = {
-    user: 'sqladmin',
-    password: '@Cp0888188459',
     server: 'nekoskills.database.windows.net',
     database: 'OnlineLearning',
+    authentication: {
+        type: 'default', // ใช้ค่า 'default' สำหรับการยืนยันตัวตนด้วยชื่อผู้ใช้และรหัสผ่าน
+        options: {
+            userName: 'sqladmin',
+            password: '@Cp0888188459',
+        }
+    },
     options: {
         encrypt: true, // Use this if you're on Windows Azure
     }
